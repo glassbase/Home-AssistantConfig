@@ -1,0 +1,129 @@
+  - platform: ps4
+    host: !secret ps4_host
+    name: 'PS4'
+
+  - platform: universal
+    name: Home Theatre
+    state_template: >
+      {% if is_state('media_player.basement_sony_tv', 'on') and is_state('media_player.pioneer_avr', 'on') %}
+      on
+      {% else %}
+      off
+      {% endif %} 
+    children:
+      - media_player.pioneer_avr
+      - media_player.basement_sony_tv
+      - media_player.ps4
+      - media_player.miboxbasement
+    commands:
+      turn_on:
+        service: media_player.turn_on
+        data:
+          entity_id: media_player.basement_sony_tv, media_player.pioneer_avr
+      turn_off:
+        service: media_player.turn_off
+        data:
+          entity_id: media_player.basement_sony_tv, media_player.pioneer_avr
+      select_source:
+        service: media_player.select_source
+        data_template:
+          entity_id: media_player.pioneer_avr
+          source: '{{ source }}'
+      volume_up:
+        service: media_player.volume_up
+        data:
+          entity_id: media_player.pioneer_avr
+      volume_down:
+        service: media_player.volume_down
+        data:
+          entity_id: media_player.pioneer_avr
+#      volume_mute:
+#        service: media_player.volume_mute
+#        data:
+#          entity_id: media_player.pioneer_avr
+      volume_set:
+        service: media_player.volume_set
+        data_template:
+          entity_id: media_player.pioneer_avr
+          volume_level: '{{ volume_level }}'
+    attributes:
+#      state: media_player.basement_sony_tv, media_player.pioneer_avr
+      source: media_player.pioneer_avr|source
+      source_list: media_player.pioneer_avr|source_list
+      is_volume_muted: media_player.pioneer_avr|is_volume_muted
+      volume_level: media_player.pioneer_avr|volume_level
+      media_title: media_player.pioneer_avr|media_title
+      media_content_id: media_player.pioneer_avr|media_title
+
+### PS4 universal media player
+### combine cmd line switch with half working ps4 media player
+#  - platform: universal
+#    name: Test Universal
+#    children:
+#      - media_player.ps4
+#    commands:
+#      turn_on:
+#        service: switch.turn_on
+#        data:
+#          entity_id: switch.playstation_4
+#      turn_off:
+#        service: switch.turn_off
+#        data:
+#          entity_id: switch.playstation_4
+#    attributes:
+#      entity_picture: media_player.ps4
+
+
+#  - platform: braviatv
+#    host: !secret bravia_host
+
+  - platform: braviatv_psk
+    name: Basement Sony TV
+    host: !secret bravia_host
+    mac: !secret bravia_mac
+    psk: !secret bravia_psk
+    amp: true
+#    android: false
+
+  - platform: pioneer
+    host: !secret pioneer_host
+#    port: 8102
+    timeout: 30
+
+  - platform: pioneer_hdz
+    host: !secret pioneer_host
+    port: 8102
+    timeout: 30
+
+  - platform: apple_tv
+    host: !secret appletv_host
+    login_id: !secret appletv_loginid
+    start_off: true
+
+#  - platform: plex
+#    entity_namespace: 'plex'
+#    show_all_controls: true
+
+#  - platform: cast
+#    host: !secret mibox1_host
+#    name: MiBox Upstairs
+
+#  - platform: cast
+#    host: !secret mibox2_host
+#    name: MiBox Tomas
+
+#  - platform: cast
+#    host: !secret mibox3_host
+#    name: MiBox Basement
+
+#  - platform: kodi
+#    host: !secret mibox1_host
+#    name: Kodi Upstairs
+
+#  - platform: kodi
+#    host: !secret mibox2_host
+#    name: Kodi Tomas
+
+#  - platform: kodi
+#    host: !secret mibox3_host
+#    name: Kodi Basement

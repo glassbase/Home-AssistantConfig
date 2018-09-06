@@ -1,0 +1,30 @@
+### for automation, transition does not work in automation? ##
+#  - name: LivingRoomAccent
+#    entities:
+#        light.window_strip:
+#            state: on
+#            effect: colorloop
+#            transition: 300
+#            brightness_pct: 100
+#        light.tv_stand:
+#            state: on
+#            effect: colorloop
+#            transition: 300
+#            brightness_pct: 100
+
+#### EXAMPLES
+#  - name: Romantic
+#    entities:
+#      light.tv_back_light: on
+#      light.ceiling:
+#        state: on
+#        xy_color: [0.33, 0.66]
+#        brightness: 200
+#  - name: Movies
+#    entities:
+#      light.tv_back_light:
+#        state: on
+#        brightness: 100
+#      light.ceiling: off
+#      media_player.sony_bravia_tv:
+#        source: HDMI 1

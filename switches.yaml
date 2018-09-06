@@ -1,0 +1,37 @@
+##### SWITCHES #####
+#  - platform: template
+#    switches:
+#HomeKit:
+#      turn_on:
+#        service: homekit.start
+#      turn_off:
+#        service: homekit.stop
+
+  - platform: transmission
+    host: !secret dockerserver
+
+#### DOCKER CONTAINER SWITCHES ####
+# CONTAINERS ON DOCKER-SERVER
+  - platform: hadockermon
+    host: !secret dockerserver
+    stats: true
+    prefix: docker_
+    exclude:
+      - ha-dockermon
+# CONTAINERS ON MAC MINI
+  - platform: hadockermon
+    host: !secret macmini
+    prefix: docker_
+    stars: true
+    exclude:
+      - ha-dockermon
+
+### ps4-waker cmd line switch to integrate with universal media player 
+### because the ps4 python implentation is not working yet
+  - platform: command_line
+    switches:
+      playstation_4:
+        command_on: ps4-waker -d 10.0.0.7 -c /config/.ps4-credentials.json
+        command_off: ps4-waker -d 10.0.0.7 -c /config/.ps4-credentials.json standby
+#        command_state: ps4-waker search | grep -i '200 Ok'
+#        value_template: '{{ value > "" }}'

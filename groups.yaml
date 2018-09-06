@@ -1,0 +1,190 @@
+#default_view:
+#  view: yes
+#  icon: mdi:home
+
+basement:
+  name: Basement
+  control: hidden
+  view: yes
+  entities:
+    - binary_sensor.basement_nest_protect_online
+    - binary_sensor.basement_co
+    - binary_sensor.basement_smoke
+    - sensor.basement_nest_protect_battery_health
+    - sensor.basement_nest_protect_co_status
+    - sensor.basement_nest_protect_smoke_status
+    - light.bloom
+    - group.basement_lamps
+    - light.lamp_left
+    - light.lamp_right
+    - light.lamp_tall
+    - light.basement_lamps
+    - media_player.basement_sony_tv
+    - media_player.pioneer_avr
+    - media_player.pioneer_avr_hdzone
+    - media_player.miboxbasement
+    - media_player.ps4
+    - media_player.home_theatre
+    - script.1518576210541
+    - script.1518576258470
+
+main_floor:
+  name: Main Floor
+  control: hidden
+  view: yes
+  entities:
+    - binary_sensor.main_floor_nest_protect_online
+    - binary_sensor.main_floor_co
+    - binary_sensor.main_floor_smoke
+    - sensor.main_floor_nest_protect_battery_health
+    - sensor.main_floor_nest_protect_co_status
+    - sensor.main_floor_nest_protect_smoke_status
+    - light.main_lights
+    - light.pot_lights
+    - light.window_strip
+    - light.strip_2
+    - media_player.appletvlivingroom
+    - media_player.kodi_livingroom
+    - remote.appletvlivingroom
+
+docker_containers:
+  name: Dockers
+  control: hidden
+  entities:
+    - switch.crashplan
+    - switch.godaddy_updater
+    - switch.godaddy_updater2
+    - switch.homeassistant
+    - switch.homebridge
+    - switch.jackett
+    - switch.le
+    - switch.monitorr
+    - switch.mysql
+    - switch.mysql_backup
+    - switch.ninja
+    - switch.ninja_cron
+    - switch.ninja_web
+    - switch.ombi
+    - switch.organizr
+    - switch.organizr2
+    - switch.portainer
+    - switch.radarr
+    - switch.radarr_4k
+    - switch.sonarr
+    - switch.sonarr_4k
+    - switch.tautulli
+    - switch.transmission
+    - switch.unifi
+    - switch.vpn
+    - switch.watchtower
+    - switch.watchtower_macmini
+    - switch.cloudflare1
+    - switch.cloudflare2
+    - switch.cloudflare3
+
+computer_systems:
+  name: Computer Systems
+  control: hidden
+  view: yes
+  entities:
+    - group.mediaserver
+    - group.transmission
+    - group.internet
+    - sensor.pihole_ads_percentage_blocked_today
+    - sensor.plex
+    - sensor.fastcom_download
+    - sensor.radarr_upcoming
+    - sensor.sonarr_upcoming
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
+    - sensor.ssl_certificate_expiry
+    - group.docker_containers
+    - switch.crashplan
+    - switch.godaddy_updater
+    - switch.godaddy_updater2
+    - switch.hass
+    - switch.homebridge
+    - switch.jackett
+    - switch.le
+    - switch.monitorr
+    - switch.mysql
+    - switch.mysql_backup
+    - switch.ninja
+    - switch.ninja_cron
+    - switch.ninja_web
+    - switch.ombi
+    - switch.organizr
+    - switch.organizr2
+    - switch.portainer
+    - switch.radarr
+    - switch.radarr_4k
+    - switch.sonarr
+    - switch.sonarr_4k
+    - switch.tautulli
+    - switch.transmission
+    - switch.unifi
+    - switch.vpn
+
+transmission:
+  name: Transmission
+  entities:
+    - sensor.transmission_status
+    - sensor.transmission_active_torrents
+    - sensor.transmission_up_speed
+    - sensor.transmission_down_speed
+    - switch.transmission_turtle_mode
+
+mediaserver:
+  name: Media Server
+  entities:
+    - sensor.plex
+    - sensor.radarr_movies
+    - sensor.radarr_upcoming
+    - sensor.radarr_disk_space
+    - sensor.sonarr_upcoming
+    - sensor.sonarr_disk_space
+
+internet:
+  name: Internet
+  entities:
+    - sensor.fastcom_download
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
+    - sensor.pihole_ads_blocked_today
+    - sensor.pihole_ads_percentage_blocked_today
+    - sensor.pihole_dns_queries_today
+    - sensor.pihole_domains_blocked
+
+indoorclimate:
+  name: Indoor Climate
+  control: hidden
+  entities:
+    - climate.main_floor
+    - sensor.main_floor_thermostat_target
+    - sensor.main_floor_thermostat_humidity
+    - sensor.main_floor_thermostat_target
+    - sensor.main_floor_thermostat_temperature
+    - sensor.main_floor_thermostat_operation_mode
+    - sensor.main_floor_thermostat_fan
+    - sensor.main_floor_thermostat_hvac_state
+
+outdoorclimate:
+  name: Outdoor Climate
+  entities:
+    - sensor.weather_cloudiness
+    - sensor.weather_humidity
+    - sensor.weather_temperature
+    - sensor.weather_symbol
+    - sensor.weather_precipitation
+    - sensor.weather_wind_direction
+    - sensor.weather_wind_speed
+
+
+#Rooms:
+#  view: yes
+#  name: Rooms
+#  entities:
+#    - group.docker_containers
+#    - group.basement

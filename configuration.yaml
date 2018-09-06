@@ -1,0 +1,95 @@
+homeassistant:
+  name: !secret hass_name
+  latitude: !secret hass_lat
+  longitude: !secret hass_long
+  elevation: !secret hass_elevation
+  unit_system: metric
+  time_zone: EST
+  customize: !include customize.yaml
+  customize_glob: !include customize_glob.yaml
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+# HTTP configuration
+http:
+  api_password: !secret http_password
+  base_url: !secret http_url
+
+# show map
+map:
+
+# Checks for available updates
+updater:
+
+# HomeKit integration
+homekit: !include homekit.yaml
+
+# Enable cloud
+cloud:
+
+# Enable iOS integration:
+ios: !include ios.yaml
+
+# Discover some devices automatically
+discovery:
+  ignore:
+    - songpal
+    - deconz
+    - philips_hue
+  enable:
+    - homekit
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+# conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+# Text to speech
+tts:
+  platform: google
+
+group: !include groups.yaml
+light: !include lights.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+device_tracker: !include device_trackers.yaml
+media_player: !include media_players.yaml
+sensor: !include sensors.yaml
+binary_sensor: !include binary_sensors.yaml
+switch: !include switches.yaml
+vacuum: !include vacuums.yaml
+
+# ---------- my devices --------------#
+lutron_caseta:
+  host: !secret caseta_host
+  keyfile: caseta.key
+  certfile: caseta.crt
+  ca_certs: caseta-bridge.crt
+
+hue:
+  bridges:
+    - host: !secret hue_host
+      allow_hue_groups: false
+
+nest:
+  client_id: !secret nest_id
+  client_secret: !secret nest_secret
+
+shell_command:
+  restart_homebridge: 'curl http://10.0.0.8:8126/container/homebridge/restart'
+  restart_web: 'curl http://10.0.0.8:8126/container/le/restart && curl http://10.0.0.8:8126/container/organizr/restart'

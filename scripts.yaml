@@ -1,0 +1,46 @@
+'1518576210541':
+  alias: Play PS4
+  sequence:
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.pioneer_avr
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.sony_bravia_tv
+      source: HDMI 1
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.pioneer_avr
+      source: PS4
+'1518576258470':
+  alias: Watch TV
+  sequence:
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.pioneer_avr
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.sony_bravia_tv
+      source: HDMI 1
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.pioneer_avr
+      source: BELL
+restart_homebridge:
+  alias: Restart Homebridge
+  sequence:
+    - service: shell_command.restart_homebridge
+restart_web:
+  alias: Restart Web Servers
+  sequence:
+    - service: shell_command.restart_web
+restart_jackett:
+  alias: Restart Jackett
+  sequence:
+    - service: shell_command.restart_jackett

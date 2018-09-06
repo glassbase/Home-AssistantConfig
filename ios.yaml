@@ -1,0 +1,13 @@
+  push:
+    categories:
+      - name: iOS_Notification
+        identifier: 'notification'
+        actions:
+          - identifier: 'APPLETVIGNORE'
+            title: 'Ignore'
+            activationMode: 'background'
+            behavior: 'default'
+          - identifier: 'APPLETVSTART'
+            title: 'Ok to continue'
+            activationMode: 'background'
+            behavior: 'default'

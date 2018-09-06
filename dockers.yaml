@@ -1,0 +1,9 @@
+##### SWITCHES####
+#  - platform: template
+#    switches:
+#HomeKit:
+#      turn_on:
+#        service: homekit.start
+#      turn_off:
+#        service: homekit.stop
+

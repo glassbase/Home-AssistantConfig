@@ -1,0 +1,122 @@
+- id: 56f70f94110b482c99010f441a2a470d
+  alias: Start HomeKit and Restart Homebridge
+  trigger:
+  - event: start
+    platform: homeassistant
+  action:
+  - delay: 00:03
+  - service: homekit.start
+  - service: shell_command.restart_homebridge
+  - data:
+      message: HomeKit started. Homebridge restarted.
+    service: notify.ios_corey_glass_iphone
+- alias: Update Available Notifications
+  trigger:
+  - platform: state
+    entity_id: updater.updater
+  action:
+  - service: notify.ios_corey_glass_iphone
+    data:
+      message: Update for Home Assistant is available.
+  id: c5f23eed8dd14ecbb9e1492f476857c6
+- id: 05eba155caa748908c49e1f298f2babb
+  alias: Apple TV Stopped
+  trigger:
+  - entity_id: media_player.appletvlivingroom
+    from: playing
+    platform: state
+    to: paused
+  action:
+  - data:
+      message: Apple TV stopped
+    service: notify.ios_corey_glass_iphone
+- action:
+  - service: notify.ios_corey_glass_iphone
+    data:
+      message: Nest is in Eco mode.
+  alias: Nest Away Mode Activated
+  condition: []
+  id: '1523147293515'
+  trigger:
+  - entity_id: sensor.main_floor_thermostat_operation_mode
+    from: 'off'
+    platform: state
+    to: eco
+  - entity_id: sensor.main_floor_thermostat_operation_mode
+    from: auto
+    platform: state
+    to: eco
+  - entity_id: sensor.main_floor_thermostat_operation_mode
+    from: heat
+    platform: state
+    to: eco
+  - entity_id: sensor.main_floor_thermostat_operation_mode
+    from: cool
+    platform: state
+    to: eco
+- id: '1535422480184'
+  alias: AccentLightingOn
+  trigger:
+  - event: sunset
+    offset: '-60'
+    platform: sun
+  condition: []
+  action:
+  - data:
+      brightness_pct: '75'
+      effect: colorloop
+      entity_id: light.tv_stand,light.window_strip,light.bloom
+      transition: '60'
+    service: light.turn_on
+  - data:
+      message: Living Room Accents Lighting On
+    service: notify.ios_corey_glass_iphone
+- id: '1535903162489'
+  alias: Transmission Down Speed
+  trigger:
+  - above: '3'
+    entity_id: sensor.transmission_down_speed
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      message: Transmission download speed at {{ states.sensor.transmission_down_speed.state
+        }} {{ states.sensor.transmission_down_speed.attributes.unit_of_measurement
+        }}
+    service: notify.ios_corey_glass_iphone
+- id: '1535905825986'
+  alias: Transmission Upload Speed
+  trigger:
+  - above: '3'
+    entity_id: sensor.transmission_up_speed
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      message: Transmission uploadspeed at {{ states.sensor.up.state }} {{ states.sensor.up.attributes.unit_of_measurement
+        }}
+    service: notify.ios_corey_glass_iphone
+- id: '1535905939234'
+  alias: AccentLightingOff
+  trigger:
+  - at: '3:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: light.window_strip,light.tv_stand,light.bloom
+    service: light.turn_off
+  - data:
+      message: LvgRm Accent Lighting Off
+    service: notify.ios_corey_glass_iphone
+- id: '1535937244536'
+  alias: BasementTV-LampsOn
+  trigger:
+  - entity_id: media_player.basement_sony_tv
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data: {}
+    service: light.turn_on

@@ -1,0 +1,6 @@
+- platform: group
+  name: Basement Lamps
+  entities:
+    - light.lamp_left
+    - light.lamp_right
+    - light.lamp_tall

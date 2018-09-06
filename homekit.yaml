@@ -1,0 +1,33 @@
+  auto_start: false
+  filter:
+    exclude_domains: [zone, light, automation, switch, group]
+#    include_domains: []
+#    include_entities: []
+    exclude_entities: 
+      - binary_sensor.51_nelson_away
+      - binary_sensor.basement_nest_protect_online
+      - binary_sensor.main_floor_nest_protect_online
+      - binary_sensor.upstairs_nest_protect_online
+      - binary_sensor.main_floor_thermostat_online
+      - binary_sensor.main_floor_thermostat_is_using_emergency_heat
+      - binary_sensor.main_floor_thermostat_is_locked
+      - binary_sensor.main_floor_thermostat_has_leaf
+      - media_player.living_room
+      - remote.living_room
+      - media_player.mi_box
+  entity_config:
+    media_player.appletvlivingroom:
+      feature_list:
+        - feature: play_pause
+    media_player.basement_sony_tv:
+      feature_list:
+        - feature: on_off
+    media_player.home_theatre:
+      feature_list:
+        - feature: on_off
+    media_player.pioneer_avr:
+      feature_list:
+        - feature: on_off
+    media_player.pioneer_avr_hdzone:
+      feature_list:
+        - feature: on_off

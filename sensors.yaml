@@ -1,0 +1,79 @@
+### SENSORS ###
+  - platform: yr
+    name: Weather
+    monitored_conditions:
+      - temperature
+      - symbol
+      - precipitation
+      - windSpeed
+      - windDirection
+      - humidity
+      - cloudiness
+
+  - platform: plex
+    host: !secret plex_host
+    token: !secret plex_token
+
+  - platform: radarr
+    host: !secret radarr_host
+    api_key: !secret radarr_api
+    url_base: /radarr
+    days: 7
+    monitored_conditions:
+      - movies
+      - upcoming
+      - diskspace
+    unit: TB
+
+  - platform: sonarr
+    host: !secret sonarr_host
+    api_key: !secret sonarr_api
+    url_base: /sonarr
+    days: 1 
+    monitored_conditions:
+      - upcoming
+      - diskspace
+    unit: TB
+
+  - platform: transmission
+    host: 10.0.0.8
+    monitored_variables:
+      - 'current_status'
+      - 'download_speed'
+      - 'upload_speed'
+      - 'active_torrents'
+
+  - platform: pi_hole
+    host: !secret pihole_host
+    monitored_conditions:
+      - ads_blocked_today
+      - ads_percentage_today
+      - domains_being_blocked
+      - dns_queries_today
+
+  - platform: cert_expiry
+    host: !secret certexp_host
+    name: CG.ca SSL Expiry
+
+#  - platform: cert_expiry
+#    host: !secret certexp_host2
+#    name: DDNS SSL Expiry
+
+  - platform: fastdotcom
+    minute:
+      - 0
+      - 15
+      - 30
+      - 45
+
+  - platform: speedtest
+    minute:
+      - 0
+      - 15
+      - 30
+      - 45
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+

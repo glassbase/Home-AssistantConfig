@@ -1,0 +1,127 @@
+switch.playstation_4:
+  icon: mdi:playstation
+binary_sensor.basement_nest_protect_online:
+  hidden: true
+binary_sensor.main_floor_nest_protect_online:
+  hidden: true
+binary_sensor.main_floor_thermostat_online:
+  hidden: true
+binary_sensor.main_floor_thermostat_is_using_emergency_heat:
+  hidden: true
+binary_sensor.upstairs_nest_protect_online:
+  hidden: true
+binary_sensor.main_floor_thermostat_is_locked:
+  hidden: true
+zone.home:
+  elevation: 197
+  friendly_name: 51 Nelson
+  latitude: 46.294052
+  longitude: -79.45538
+media_player.appletvlivingroom:
+  start_off: 'true'
+light.living_room:
+  hidden: true
+light.main_floor:
+  hidden: true
+light.upstairs:
+  hidden: true
+light.basement:
+  hidden: true
+light.home:
+  hidden: true
+light.system:
+  hidden: true
+media_player.pioneer_avr:
+  friendly_name: Amp
+  order: 4
+  source_list:
+  - MIBOX
+  - BELL
+  - PS4
+script.1518576258470:
+  hidden: true
+script.1518576210541:
+  hidden: true
+media_player.pioneer_avr_hdzone:
+  friendly_name: Amp (Z2)
+  source_list:
+  - MIBOX
+  - BELL
+  - PS4
+  order: 5
+remote.appletvlivingroom:
+  hidden: true
+script.restart_homebridge:
+  hidden: true
+automation.start_homekit:
+  hidden: true
+automation.appletvstopped:
+  hidden: true
+automation.update_available_notifications:
+  hidden: true
+automation.nest_away_mode_activated:
+  hidden: true
+sensor.corey_glass_iphone_battery_level:
+  hidden: true
+sensor.corey_glass_iphone_battery_state:
+  hidden: true
+binary_sensor.main_floor_thermostat_fan:
+  hidden: true
+binary_sensor.main_floor_thermostat_has_leaf:
+  hidden: true
+binary_sensor.51_nelson_away:
+  hidden: true
+sensor.51_nelson_eta:
+  hidden: true
+device_tracker.corey_glass_iphone:
+  hidden: true
+sensor.transmission_status:
+  icon: mdi:cloud-sync
+sensor.transmission_active_torrents:
+  icon: mdi:cloud
+sensor.transmission_up_speed:
+  icon: mdi:cloud-upload
+sensor.transmission_down_speed:
+  icon: mdi:cloud-download
+sensor.radarr_movies:
+  icon: mdi:movie
+sensor.radarr_upcoming:
+  icon: mdi:play-network
+sensor.sonarr_upcoming:
+  icon: mdi:television-classic
+sensor.plex:
+  icon: mdi:plex
+switch.transmission_turtle_mode:
+  icon: mdi:pause-circle
+configurator.homebridge:
+  hidden: true
+script.restart_jackett:
+  hidden: true
+group.main_floor:
+  entity_id:
+  - binary_sensor.main_floor_nest_protect_online
+  - binary_sensor.main_floor_co
+  - binary_sensor.main_floor_smoke
+  - sensor.main_floor_nest_protect_battery_health
+  - sensor.main_floor_nest_protect_co_status
+  - sensor.main_floor_nest_protect_smoke_status
+  - light.main_lights
+  - light.pot_lights
+  - light.window_strip
+  - light.tv_stand
+  - media_player.appletvlivingroom
+  - remote.appletvlivingroom
+automation.transmission_down_speed:
+  hidden: true
+automation.transmission_upload_speed:
+  hidden: true
+automation.livingroomaccentlightingoff:
+  hidden: true
+automation.livingroomaccentlightingon:
+  hidden: true
+automation.start_homekit_and_restart_homebridge:
+  hidden: true
+automation.apple_tv_stopped:
+  hidden: true
+configurator.smart_bridge_2:
+  hidden: true

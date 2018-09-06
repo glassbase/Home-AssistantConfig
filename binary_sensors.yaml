@@ -1,0 +1,49 @@
+### CONVERT NEST SMOKE CO2 SENSORS TO BINARY SENSORS FOR HOMEKIT ###
+
+#### CO 
+  - platform: template
+    sensors:
+      basement_co:
+        friendly_name: "Basement Protect CO"
+        device_class: gas
+        value_template: 
+          is_state('sensor.basement_nest_protect_co_status', 'Ok')
+  - platform: template
+    sensors:
+      main_floor_co:
+        friendly_name: "Main Floor Protect CO"
+        device_class: gas
+        value_template:
+          is_state('sensor.main_floor_nest_protect_co_status', 'Ok')
+  - platform: template
+    sensors:
+      updtairs_co:
+        friendly_name: "Upstairs Protect CO"
+        device_class: gas
+        value_template: 
+          is_state('sensor.upstairs_nest_protect_co_status', 'Ok')
+#### END CO
+
+#### SMOKE
+  - platform: template
+    sensors:
+      basement_smoke:
+        friendly_name: "Basement Protect Smoke"
+        device_class: smoke
+        value_template:
+          is_state('sensor.basement_nest_protect_smoke_status', 'Ok')
+  - platform: template
+    sensors:
+      main_floor_smoke:
+        friendly_name: "Main Floor Protect Smoke"
+        device_class: smoke
+        value_template:
+          is_state('sensor.main_floor_nest_protect_smoke_status', 'Ok')
+  - platform: template
+    sensors:
+      upstairs_smoke:
+        friendly_name: "Upstairs Protect Smoke"
+        device_class: smoke
+        value_template:
+          is_state('sensor.upstairs_nest_protect_smoke_status', 'Ok')
+#### END SMOKE
