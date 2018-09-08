@@ -28,7 +28,7 @@ map:
 # Checks for available updates
 updater:
 
-# HomeKit integration
+# HomeKit integration - push HA devices to HomeKit
 homekit: !include homekit.yaml
 
 # Enable cloud
@@ -43,8 +43,10 @@ discovery:
     - songpal
     - deconz
     - philips_hue
-  enable:
-    - homekit
+# Enable capturing HomeKit accessories/devices into HA directly, effectively bypassing HomeKit
+# Must not be adding to Apple Home already or they will not add to HA
+#  enable:
+#    - homekit
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 # conversation:
@@ -73,6 +75,7 @@ sensor: !include sensors.yaml
 binary_sensor: !include binary_sensors.yaml
 switch: !include switches.yaml
 vacuum: !include vacuums.yaml
+zone: !include zones.yaml
 
 # ---------- my devices --------------#
 lutron_caseta:

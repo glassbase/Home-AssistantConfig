@@ -24,6 +24,8 @@
       - upcoming
       - diskspace
     unit: TB
+    include_paths:
+      - /media_1/MOVIES
 
   - platform: sonarr
     host: !secret sonarr_host
@@ -34,6 +36,8 @@
       - upcoming
       - diskspace
     unit: TB
+    include_paths:
+      - /tv
 
   - platform: transmission
     host: 10.0.0.8
@@ -62,16 +66,16 @@
   - platform: fastdotcom
     minute:
       - 0
-      - 15
-      - 30
-      - 45
+#      - 15
+#      - 30
+#      - 45
 
   - platform: speedtest
     minute:
       - 0
-      - 15
-      - 30
-      - 45
+#      - 15
+#      - 30
+#      - 45
     monitored_conditions:
       - ping
       - download

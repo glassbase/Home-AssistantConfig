@@ -118,5 +118,14 @@
     to: 'on'
   condition: []
   action:
-  - data: {}
+  - data:
+      brightness_pct: '1'
+      entity_id: group.basement
+      profile: relax
+    service: light.turn_on
+  - data:
+      brightness_pct: '100'
+      effect: colorloop
+      entity_id: light.bloom
+      transition: '60'
     service: light.turn_on

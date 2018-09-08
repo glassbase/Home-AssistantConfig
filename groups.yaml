@@ -13,6 +13,7 @@ basement:
     - sensor.basement_nest_protect_battery_health
     - sensor.basement_nest_protect_co_status
     - sensor.basement_nest_protect_smoke_status
+    - sensor.basement_nest_protect_color_status
     - light.bloom
     - group.basement_lamps
     - light.lamp_left
@@ -24,6 +25,7 @@ basement:
     - media_player.pioneer_avr_hdzone
     - media_player.miboxbasement
     - media_player.ps4
+    - switch.playstation_4
     - media_player.home_theatre
     - script.1518576210541
     - script.1518576258470
@@ -39,48 +41,45 @@ main_floor:
     - sensor.main_floor_nest_protect_battery_health
     - sensor.main_floor_nest_protect_co_status
     - sensor.main_floor_nest_protect_smoke_status
-    - light.main_lights
-    - light.pot_lights
+    - sensor.main_floor_nest_protect_color_status
     - light.window_strip
-    - light.strip_2
+    - light.tv_stand
     - media_player.appletvlivingroom
-    - media_player.kodi_livingroom
     - remote.appletvlivingroom
+    - light.living_room_living_room_light
+    - light.living_room_pot_lights
 
 docker_containers:
   name: Dockers
   control: hidden
   entities:
-    - switch.crashplan
-    - switch.godaddy_updater
-    - switch.godaddy_updater2
-    - switch.homeassistant
-    - switch.homebridge
-    - switch.jackett
-    - switch.le
-    - switch.monitorr
-    - switch.mysql
-    - switch.mysql_backup
-    - switch.ninja
-    - switch.ninja_cron
-    - switch.ninja_web
-    - switch.ombi
-    - switch.organizr
-    - switch.organizr2
-    - switch.portainer
-    - switch.radarr
-    - switch.radarr_4k
-    - switch.sonarr
-    - switch.sonarr_4k
-    - switch.tautulli
-    - switch.transmission
-    - switch.unifi
-    - switch.vpn
-    - switch.watchtower
-    - switch.watchtower_macmini
-    - switch.cloudflare1
-    - switch.cloudflare2
-    - switch.cloudflare3
+    - switch.docker_crashplan
+    - switch.docker_homeassistant
+    - switch.docker_homebridge
+    - switch.docker_jackett
+    - switch.docker_le
+    - switch.docker_monitorr
+    - switch.docker_mysql
+    - switch.docker_mysql_backup
+    - switch.docker_ninja
+    - switch.docker_ninja_cron
+    - switch.docker_ninja_web
+    - switch.docker_ombi
+    - switch.docker_organizr
+    - switch.docker_portainer
+    - switch.docker_radarr
+    - switch.docker_radarr_4k
+    - switch.docker_sonarr
+    - switch.docker_sonarr_4k
+    - switch.docker_tautulli
+    - switch.docker_transmission
+    - switch.docker_unifi
+    - switch.docker_vpn
+    - switch.docker_watchtower
+    - switch.docker_watchtower_macmini
+    - switch.docker_cloudflare1
+    - switch.docker_cloudflare2
+    - switch.docker_cloudflare3
 
 computer_systems:
   name: Computer Systems
@@ -100,31 +99,6 @@ computer_systems:
     - sensor.speedtest_ping
     - sensor.ssl_certificate_expiry
     - group.docker_containers
-    - switch.crashplan
-    - switch.godaddy_updater
-    - switch.godaddy_updater2
-    - switch.hass
-    - switch.homebridge
-    - switch.jackett
-    - switch.le
-    - switch.monitorr
-    - switch.mysql
-    - switch.mysql_backup
-    - switch.ninja
-    - switch.ninja_cron
-    - switch.ninja_web
-    - switch.ombi
-    - switch.organizr
-    - switch.organizr2
-    - switch.portainer
-    - switch.radarr
-    - switch.radarr_4k
-    - switch.sonarr
-    - switch.sonarr_4k
-    - switch.tautulli
-    - switch.transmission
-    - switch.unifi
-    - switch.vpn
 
 transmission:
   name: Transmission
@@ -173,6 +147,7 @@ indoorclimate:
 outdoorclimate:
   name: Outdoor Climate
   entities:
+    - sun.sun
     - sensor.weather_cloudiness
     - sensor.weather_humidity
     - sensor.weather_temperature
@@ -181,6 +156,31 @@ outdoorclimate:
     - sensor.weather_wind_direction
     - sensor.weather_wind_speed
 
+nest_protects:
+  name: Nest Protects
+  control: hidden
+  entities:
+    - binary_sensor.basement_nest_protect_online
+    - binary_sensor.basement_co
+    - binary_sensor.basement_smoke
+    - sensor.basement_nest_protect_battery_health
+    - sensor.basement_nest_protect_co_status
+    - sensor.basement_nest_protect_smoke_status
+    - sensor.basement_nest_protect_color_status
+    - binary_sensor.main_floor_nest_protect_online
+    - binary_sensor.main_floor_co
+    - binary_sensor.main_floor_smoke
+    - sensor.main_floor_nest_protect_battery_health
+    - sensor.main_floor_nest_protect_co_status
+    - sensor.main_floor_nest_protect_smoke_status
+    - sensor.main_floor_nest_protect_color_status
+    - binary_sensor.upstairs_nest_protect_online
+    - binary_sensor.upstairs_co
+    - binary_sensor.upstairs_smoke
+    - sensor.upstairs_nest_protect_battery_health
+    - sensor.upstairs_nest_protect_co_status
+    - sensor.upstairs_nest_protect_smoke_status
+    - sensor.upstairs_nest_protect_color_status
 
 #Rooms:
 #  view: yes
@@ -188,3 +188,4 @@ outdoorclimate:
 #  entities:
 #    - group.docker_containers
 #    - group.basement
+
