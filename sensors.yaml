@@ -63,27 +63,27 @@
 #    host: !secret certexp_host2
 #    name: DDNS SSL Expiry
 
-  - platform: fastdotcom
-    minute:
-      - 0
+#  - platform: fastdotcom
+#    minute:
+#      - 0
 #      - 15
 #      - 30
 #      - 45
 
-  - platform: speedtest
-    minute:
-      - 0
+#  - platform: speedtest
+#    minute:
+#      - 0
 #      - 15
 #      - 30
 #      - 45
-    monitored_conditions:
-      - ping
-      - download
-      - upload
+#    monitored_conditions:
+#      - ping
+#      - download
+#      - upload
 
-  - platform: iperf3
-    host: iperf.he.net
-    monitored_conditions:
-      - download
-      - upload
-    parallel: 10
+#  - platform: iperf3
+#    host: iperf.he.net
+#    monitored_conditions:
+#      - download
+#      - upload
+#    parallel: 10

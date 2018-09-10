@@ -123,6 +123,8 @@ mediaserver:
 internet:
   name: Internet
   entities:
+    - sensor.download_iperfhenet
+    - sensor.upload_iperfhenet
     - sensor.fastcom_download
     - sensor.speedtest_download
     - sensor.speedtest_upload
