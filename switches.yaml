@@ -7,8 +7,8 @@
 #      turn_off:
 #        service: homekit.stop
 
-  - platform: transmission
-    host: !secret dockerserver
+#  - platform: transmission
+#    host: !secret dockerserver
 
 #### DOCKER CONTAINER SWITCHES ####
 # CONTAINERS ON DOCKER-SERVER

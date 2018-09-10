@@ -69,12 +69,9 @@ binary_sensor.main_floor_thermostat_fan:
   hidden: true
 binary_sensor.main_floor_thermostat_has_leaf:
   hidden: true
-binary_sensor.51_nelson_away:
-  hidden: true
-sensor.51_nelson_eta:
-  hidden: true
-device_tracker.corey_glass_iphone:
-  hidden: true
+binary_sensor.51_nelson_away: {}
+sensor.51_nelson_eta: {}
+device_tracker.corey_glass_iphone: {}
 sensor.transmission_status:
   icon: mdi:cloud-sync
 sensor.transmission_active_torrents:

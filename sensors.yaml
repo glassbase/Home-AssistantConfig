@@ -20,7 +20,7 @@
     url_base: /radarr
     days: 7
     monitored_conditions:
-      - movies
+#      - movies
       - upcoming
       - diskspace
     unit: TB
@@ -40,7 +40,7 @@
       - /tv
 
   - platform: transmission
-    host: 10.0.0.8
+    host: !secret dockerserver
     monitored_variables:
       - 'current_status'
       - 'download_speed'
@@ -81,3 +81,9 @@
       - download
       - upload
 
+  - platform: iperf3
+    host: iperf.he.net
+    monitored_conditions:
+      - download
+      - upload
+    parallel: 10

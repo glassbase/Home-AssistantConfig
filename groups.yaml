@@ -99,6 +99,7 @@ computer_systems:
     - sensor.speedtest_ping
     - sensor.ssl_certificate_expiry
     - group.docker_containers
+    - sensor.cgca_ssl_expiry
 
 transmission:
   name: Transmission
