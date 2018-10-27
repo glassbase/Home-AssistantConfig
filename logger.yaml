@@ -1,0 +1,50 @@
+### LOGGER CONFIG FILE 
+
+  default: info # warning
+  logs:
+    hole: warning
+    homeassistant.loader: warning
+    homeassistant.setup: warning
+    homeassistant.core: warning
+    pyhap.hap_server: warning     ## homekit integration
+    homeassistant.components.roomba: warning
+    homeassistant.components.automation: warning
+    homeassistant.components.light: warning
+    homeassistant.components.switch: warning
+    homeassistant.components.cover: warning
+    homeassistant.components.camera: warning
+    homeassistant.components.cast: warning
+    homeassistant.components.climate: warning
+    homeassistant.components.cloud: warning
+    homeassistant.components.config: info
+    homeassistant.components.device_tracker: info
+    homeassistant.components.group: warning
+    homeassistant.components.history: warning
+    homeassistant.components.http: warning
+    homeassistant.components.hue: warning
+    homeassistant.components.ios: warning
+    homeassistant.components.homekit: warning
+    homeassistant.components.input_select: warning
+    homeassistant.components.lutron_caseta: warning
+    homeassistant.components.notify: warning
+    homeassistant.components.remote: warning
+    homeassistant.components.scene: warning
+    homeassistant.components.script: warning
+    homeassistant.components.sun: warning
+    homeassistant.components.shell_command: warning
+    homeassistant.components.vacuum: warning
+    homeassistant.components.zone: warning
+    homeassistant.components.sensor: warning
+    homeassistant.components.binary_sensor: warning
+    homeassistant.components.media_player: warning
+    homeassistant.components.discovery: info
+    homeassistant.components.media_player.cast: warning
+    homeassistant.components.media_player.onkyo: debug
+    homeassistant.components.media_player.pioneer: warning
+    homeassistant.components.media_player.pioneer_hdz: warning
+    roomba.roomba.Roomba: warning
+    nest: warning
+    homeassistant.components.nest: warning
+    homeassistant.components.sensor.nest: warning
+    pychromecast: warning
+    pyatv.daap: warning

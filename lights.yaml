@@ -1,3 +1,9 @@
+- platform: flux_led
+  automatic_add: true
+  devices:
+    !secret masterbedroomaccent:
+      name: Master Bedroom Accent
+
 - platform: group
   name: Basement Lamps
   entities:

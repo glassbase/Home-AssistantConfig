@@ -14,7 +14,7 @@ binary_sensor.main_floor_thermostat_is_locked:
   hidden: true
 zone.home:
   elevation: 197
-  friendly_name: 51 Nelson
+  friendly_name: Home
   latitude: 46.294052
   longitude: -79.45538
 media_player.appletvlivingroom:
@@ -33,7 +33,6 @@ light.system:
   hidden: true
 media_player.pioneer_avr:
   friendly_name: Amp
-  order: 4
   source_list:
   - MIBOX
   - BELL
@@ -43,35 +42,22 @@ script.1518576258470:
 script.1518576210541:
   hidden: true
 media_player.pioneer_avr_hdzone:
-  friendly_name: Amp (Z2)
+  friendly_name: Amp (Zone2)
   source_list:
   - MIBOX
   - BELL
   - PS4
-  order: 5
 remote.appletvlivingroom:
   hidden: true
 script.restart_homebridge:
   hidden: true
-automation.start_homekit:
-  hidden: true
-automation.appletvstopped:
-  hidden: true
-automation.update_available_notifications:
-  hidden: true
-automation.nest_away_mode_activated:
-  hidden: true
-sensor.corey_glass_iphone_battery_level:
-  hidden: true
-sensor.corey_glass_iphone_battery_state:
-  hidden: true
-binary_sensor.main_floor_thermostat_fan:
-  hidden: true
 binary_sensor.main_floor_thermostat_has_leaf:
   hidden: true
-binary_sensor.51_nelson_away: {}
-sensor.51_nelson_eta: {}
-device_tracker.corey_glass_iphone: {}
+binary_sensor.51_nelson_away:
+  friendly_name: Nest Away Mode
+sensor.51_nelson_eta:
+  friendly_name: Nest ETA for arrival
+  hidden: true
 sensor.transmission_status:
   icon: mdi:cloud-sync
 sensor.transmission_active_torrents:
@@ -94,31 +80,45 @@ configurator.homebridge:
   hidden: true
 script.restart_jackett:
   hidden: true
-group.main_floor:
-  entity_id:
-  - binary_sensor.main_floor_nest_protect_online
-  - binary_sensor.main_floor_co
-  - binary_sensor.main_floor_smoke
-  - sensor.main_floor_nest_protect_battery_health
-  - sensor.main_floor_nest_protect_co_status
-  - sensor.main_floor_nest_protect_smoke_status
-  - light.main_lights
-  - light.pot_lights
-  - light.window_strip
-  - light.tv_stand
-  - media_player.appletvlivingroom
-  - remote.appletvlivingroom
-automation.transmission_down_speed:
-  hidden: true
-automation.transmission_upload_speed:
-  hidden: true
-automation.livingroomaccentlightingoff:
-  hidden: true
-automation.livingroomaccentlightingon:
-  hidden: true
-automation.start_homekit_and_restart_homebridge:
-  hidden: true
-automation.apple_tv_stopped:
-  hidden: true
 configurator.smart_bridge_2:
+  hidden: true
+sensor.corey_glass_iphone_battery_state:
+  hidden: true
+sensor.corey_glass_iphone_battery_level:
+  hidden: true
+switch.roomba:
+  hidden: true
+sensor.nest_away:
+  icon: mdi:human-male-female
+device_tracker.jordan:
+  icon: mdi:human-female
+device_tracker.cg:
+  icon: mdi:human-male
+group.all_lights:
+  order: 1
+group.indoorclimate:
+  order: 2
+group.internet:
+  order: 3
+group.mediaserver:
+  order: 4
+group.transmission:
+  order: 5
+group.outdoorclimate:
+  order: 6
+group.nest_protects:
+  order: 7
+group.docker_containers:
+  order: 90
+group.all_scripts:
+  order: 98
+group.all_automations:
+  order: 99
+media_player.plex_appletvlivingroom:
+  hidden: true
+script.disable_pihole:
+  hidden: true
+sensor.main_floor_thermostat_temperature:
+  hidden: true
+sensor.main_floor_thermostat_target:
   hidden: true

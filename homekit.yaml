@@ -1,9 +1,10 @@
   auto_start: false
   filter:
-    exclude_domains: [zone, light, automation, switch, group]
+    exclude_domains: [zone, automation, group, script]
 #    include_domains: []
 #    include_entities: []
     exclude_entities: 
+      ## nest things to ignore
       - binary_sensor.51_nelson_away
       - binary_sensor.basement_nest_protect_online
       - binary_sensor.main_floor_nest_protect_online
@@ -12,13 +13,73 @@
       - binary_sensor.main_floor_thermostat_is_using_emergency_heat
       - binary_sensor.main_floor_thermostat_is_locked
       - binary_sensor.main_floor_thermostat_has_leaf
-      - media_player.living_room
-      - remote.living_room
+      - sensor.main_floor_thermostat_fan
+      - sensor.main_floor_thermostat_target
+      - sensor.main_floor_thermostat_humidity
+      - sensor.main_floor_thermostat_temperature
+      - binary_sensor.main_floor_thermostat_fan
+
+      ## weather
+      - sensor.weather_temperature
+
+      ## hue lights to ignore
+      - light.basement_lamps
+      - light.bloom
+      - light.lamp_left
+      - light.lamp_right
+      - light.lamp_tall
+      - light.tv_stand
+      - light.window_strip
+
+      ## caseta lights to ignore
+      - light.living_room_living_room_light
+      - light.living_room_pot_lights
+
+      ## media players
       - media_player.mi_box
+      - switch.playstation_4
+      - media_player.appletvlivingroom
+
+      ## remotes 
+      - remote.appletvlivingroom
+
+      ## docker switches
+      - switch.docker_cloudflare1
+      - switch.docker_cloudflare2
+      - switch.docker_cloudflare3
+      - switch.docker_cloudflare4
+      - switch.docker_crashplan
+      - switch.docker_homeassistant
+      - switch.docker_homebridge
+      - switch.docker_jackett
+      - switch.docker_le
+      - switch.docker_mariadb
+      - switch.docker_monitorr
+      - switch.docker_mysql_backup
+      - switch.docker_netdata
+      - switch.docker_netdata_macmini
+      - switch.docker_ninja
+      - switch.docker_ninja_cron
+      - switch.docker_ninja_web
+      - switch.docker_ombi
+      - switch.docker_organizr
+      - switch.docker_portainer
+      - switch.docker_radarr
+      - switch.docker_radarr_4k
+      - switch.docker_sonarr
+      - switch.docker_sonarr_4k
+      - switch.docker_suitecrm
+      - switch.docker_tautulli
+      - switch.docker_transmission
+      - switch.docker_unifi
+      - switch.docker_vpn
+      - switch.docker_watchtower
+      - switch.docker_watchtower_macmini
+
+# pihole switch
+      - switch.pihole_switch
+
   entity_config:
-    media_player.appletvlivingroom:
-      feature_list:
-        - feature: play_pause
     media_player.basement_sony_tv:
       feature_list:
         - feature: on_off
@@ -31,3 +92,8 @@
     media_player.pioneer_avr_hdzone:
       feature_list:
         - feature: on_off
+    media_player.ps4:
+      feature_list:
+        - feature: on_off
+    device_tracker.cg:
+      name: corey

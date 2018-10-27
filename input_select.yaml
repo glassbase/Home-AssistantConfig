@@ -1,0 +1,24 @@
+log_level:
+  name: Log Level
+  options:
+    - critical
+    - fatal
+    - error
+    - warning
+    - warn
+    - info
+    - debug
+    - notset
+  initial: warn
+  icon: mdi:note-multiple
+
+amp_inputs:
+  name: Pioneer Inputs
+  options:
+    - 'Z1: Bell, Z2: PS4'
+    - 'Z1: Bell, Z2: MiBox'
+    - 'Z1: PS4, Z2: MiBox'
+    - 'Z1: MiBox, Z2: PS4'
+    - 'Select Inputs'
+  initial: 'Select Inputs'
+  icon: mdi:theater

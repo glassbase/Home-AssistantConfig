@@ -1,6 +1,48 @@
+# pioneer amp
+# component uses telnet port 23 as default
+# pioneer app uses 8102
+  - platform: pioneer
+    host: !secret pioneer_host
+    timeout: 200 #default is 10
+
+# pioneer zone2 custom component
+# https://github.com/salphonso/custom_components/blob/master/media_player/pioneer_hdz.py
+# component uses telnet port 8103?
+# pioneer main componnent uses 23
+  - platform: pioneer_hdz
+    host: !secret pioneer_host
+    port: 23
+    timeout: 200 #default is 10
+
   - platform: ps4
     host: !secret ps4_host
     name: 'PS4'
+    games_filename: '.ps4-games.json'
+
+#  - platform: braviatv
+#    host: !secret bravia_host
+
+  - platform: braviatv_psk
+    name: Basement Sony TV
+    host: !secret bravia_host
+    mac: !secret bravia_mac
+    psk: !secret bravia_psk
+    amp: true
+#    android: false
+
+### onkyo component supports vsx1131, i have 1130 which is different?!?
+#  - platform: onkyo
+#    host: !secret pioneer_host
+#    name: receiver
+
+  - platform: apple_tv
+    host: !secret appletv_host
+    login_id: !secret appletv_loginid
+    start_off: true
+
+#  - platform: plex
+#    entity_namespace: 'plex'
+#    show_all_controls: true
 
   - platform: universal
     name: Home Theatre
@@ -55,75 +97,24 @@
       media_title: media_player.pioneer_avr|media_title
       media_content_id: media_player.pioneer_avr|media_title
 
-### PS4 universal media player
-### combine cmd line switch with half working ps4 media player
-#  - platform: universal
-#    name: Test Universal
-#    children:
-#      - media_player.ps4
-#    commands:
-#      turn_on:
-#        service: switch.turn_on
-#        data:
-#          entity_id: switch.playstation_4
-#      turn_off:
-#        service: switch.turn_off
-#        data:
-#          entity_id: switch.playstation_4
-#    attributes:
-#      entity_picture: media_player.ps4
 
-
-#  - platform: braviatv
-#    host: !secret bravia_host
-
-  - platform: braviatv_psk
-    name: Basement Sony TV
-    host: !secret bravia_host
-    mac: !secret bravia_mac
-    psk: !secret bravia_psk
-    amp: true
-#    android: false
-
-  - platform: pioneer
-    host: !secret pioneer_host
-#    port: 8102
-    timeout: 30
-
-  - platform: pioneer_hdz
-    host: !secret pioneer_host
-    port: 8102
-    timeout: 30
-
-  - platform: apple_tv
-    host: !secret appletv_host
-    login_id: !secret appletv_loginid
-    start_off: true
-
-#  - platform: plex
-#    entity_namespace: 'plex'
-#    show_all_controls: true
-
+### this is deprecated config ###
 #  - platform: cast
 #    host: !secret mibox1_host
-#    name: MiBox Upstairs
+#    name: Bedroom
 
+### this is deprecated config ###
 #  - platform: cast
 #    host: !secret mibox2_host
-#    name: MiBox Tomas
+#    name: Tomas
 
+### this is deprecated config ###
 #  - platform: cast
 #    host: !secret mibox3_host
-#    name: MiBox Basement
+#    name: Sofia
 
-#  - platform: kodi
-#    host: !secret mibox1_host
-#    name: Kodi Upstairs
+### this is deprecated config ###
+#  - platform: cast
+#    host: !secret mibox4_host
+#    name: Basement
 
-#  - platform: kodi
-#    host: !secret mibox2_host
-#    name: Kodi Tomas
-
-#  - platform: kodi
-#    host: !secret mibox3_host
-#    name: Kodi Basement

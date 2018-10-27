@@ -32,15 +32,19 @@
     data:
       entity_id: media_player.pioneer_avr
       source: BELL
-restart_homebridge:
-  alias: Restart Homebridge
+disable_pihole:
+  alias: Disable PiHole for 10mins
   sequence:
-    - service: shell_command.restart_homebridge
+    - service: shell_command.disable_pihole
+restart_radarr:
+  alias: Restart Radarr
+  sequence:
+    - service: shell_command.restart_radarr
+restart_sonarr:
+  alias: Restart Sonarr
+  sequence:
+    - service: shell_command.restart_sonarr
 restart_web:
   alias: Restart Web Servers
   sequence:
     - service: shell_command.restart_web
-restart_jackett:
-  alias: Restart Jackett
-  sequence:
-    - service: shell_command.restart_jackett

@@ -1,0 +1,6 @@
+  disable_pihole: curl 'http://10.0.0.254/admin/api.php?disable=300&auth='
+#  restart_homebridge: 'curl http://10.0.0.8:8126/container/homebridge/restart'
+  restart_web: 'curl http://10.0.0.8:8126/container/le/restart && curl http://10.0.0.8:8126/container/organizr/restart'
+  restart_radarr: 'curl http://10.0.0.8:8126/container/radarr/restart && curl http://10.0.0.8:8126/container/radarr_4k/restart'
+  restart_sonarr: 'curl http://10.0.0.8:8126/container/sonarr/restart && curl http://10.0.0.8:8126/container/sonarr_4k/restart'
+

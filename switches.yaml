@@ -1,14 +1,30 @@
 ##### SWITCHES #####
-#  - platform: template
-#    switches:
-#HomeKit:
-#      turn_on:
-#        service: homekit.start
-#      turn_off:
-#        service: homekit.stop
+  - platform: command_line
+    switches:
+      pihole_switch:
+        command_on: "curl -X GET 'http://10.0.0.254/admin/api.php?enable&auth='"
+        command_off: "curl -X GET 'http://10.0.0.254/admin/api.php?disable=600&auth='"
+        command_state: "curl -X GET 'http://10.0.0.254/admin/api.php?status'"
+        value_template: "{{ value_json.status == 'enabled' }}"
+        friendly_name: PiHole
 
-#  - platform: transmission
-#    host: !secret dockerserver
+# Convert Roomba into switch for HomeKit 
+# (only reason I needed homebridge-homeassistant plugin was it integrated on/off for vacuum)
+  - platform: template
+    switches:
+      roomba:
+#        value_template: "{{ is_state('vacuum.main_floor_roomba', 'on') }}"
+        value_template: >-
+          {{ is_state('states.vacuum.main_floor_roomba.attributes.status' != 'Charging')
+             or is_state('states.vacuum.main_floor_roomba.attributes.status' != 'User Docking') }}
+        turn_on:
+          service: vacuum.turn_on
+          data:
+            entity_id: vacuum.main_floor_roomba
+        turn_off:
+          service: vacuum.return_to_base
+          data:
+            entity_id: vacuum.main_floor_roomba
 
 #### DOCKER CONTAINER SWITCHES ####
 # CONTAINERS ON DOCKER-SERVER
@@ -35,3 +51,16 @@
         command_off: ps4-waker -d 10.0.0.7 -c /config/.ps4-credentials.json standby
 #        command_state: ps4-waker search | grep -i '200 Ok'
 #        value_template: '{{ value > "" }}'
+
+# HomeKit integration on/off switch
+#  - platform: template
+#    switches:
+#      turn_on:
+#        service: homekit.start
+#      turn_off:
+#        service: homekit.stop
+
+# Tranmission switch to enable turtle/slow mode, don't need with good internet
+#  - platform: transmission
+#    host: !secret dockerserver
+

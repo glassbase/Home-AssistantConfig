@@ -1,0 +1,16 @@
+### Nest thermostat fan to push to HomeKit
+  - platform: template
+    fans:
+       nest_thermostat:
+        friendly_name: "Nest Fan"
+        value_template: "{{ states('binary_sensor.main_floor_thermostat_fan') }}"
+        turn_on:
+          service: climate.set_fan_mode
+          data:
+            entity_id: "climate.main_floor"
+            fan_mode: "on"
+        turn_off:
+          service: climate.set_fan_mode
+          data:
+            entity_id: "climate.main_floor"
+            fan_mode: "auto"

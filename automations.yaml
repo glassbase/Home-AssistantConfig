@@ -1,21 +1,20 @@
 - id: 56f70f94110b482c99010f441a2a470d
-  alias: Start HomeKit and Restart Homebridge
+  alias: Start HomeKit
   trigger:
   - event: start
     platform: homeassistant
   action:
-  - delay: 00:03
+  - delay: 00:04
   - service: homekit.start
-  - service: shell_command.restart_homebridge
   - data:
-      message: HomeKit started. Homebridge restarted.
-    service: notify.ios_corey_glass_iphone
+      message: HomeKit integration started.
+    service: notify.ios_CG
 - alias: Update Available Notifications
   trigger:
   - platform: state
     entity_id: updater.updater
   action:
-  - service: notify.ios_corey_glass_iphone
+  - service: notify.ios_CG
     data:
       message: Update for Home Assistant is available.
   id: c5f23eed8dd14ecbb9e1492f476857c6
@@ -29,31 +28,19 @@
   action:
   - data:
       message: Apple TV stopped
-    service: notify.ios_corey_glass_iphone
-- action:
-  - service: notify.ios_corey_glass_iphone
-    data:
-      message: Nest is in Eco mode.
-  alias: Nest Away Mode Activated
-  condition: []
-  id: '1523147293515'
+    service: notify.ios_CG
+- id: '1523147293515'
+  alias: Nest Eco Mode Activated
   trigger:
   - entity_id: sensor.main_floor_thermostat_operation_mode
-    from: 'off'
     platform: state
     to: eco
-  - entity_id: sensor.main_floor_thermostat_operation_mode
-    from: auto
-    platform: state
-    to: eco
-  - entity_id: sensor.main_floor_thermostat_operation_mode
-    from: heat
-    platform: state
-    to: eco
-  - entity_id: sensor.main_floor_thermostat_operation_mode
-    from: cool
-    platform: state
-    to: eco
+  condition: []
+  action:
+  - data:
+      message: Nest is in Eco mode.
+      title: Nest
+    service: notify.ios_CG
 - id: '1535422480184'
   alias: AccentLightingOn
   trigger:
@@ -70,11 +57,11 @@
     service: light.turn_on
   - data:
       message: Living Room Accents Lighting On
-    service: notify.ios_corey_glass_iphone
+    service: notify.ios_CG
 - id: '1535903162489'
   alias: Transmission Down Speed
   trigger:
-  - above: '3'
+  - above: '3.5'
     entity_id: sensor.transmission_down_speed
     platform: numeric_state
   condition: []
@@ -83,19 +70,21 @@
       message: Transmission download speed at {{ states.sensor.transmission_down_speed.state
         }} {{ states.sensor.transmission_down_speed.attributes.unit_of_measurement
         }}
-    service: notify.ios_corey_glass_iphone
+      title: Transmission
+    service: notify.pushover
 - id: '1535905825986'
   alias: Transmission Upload Speed
   trigger:
-  - above: '3'
+  - above: '5.0'
     entity_id: sensor.transmission_up_speed
     platform: numeric_state
   condition: []
   action:
   - data:
-      message: Transmission uploadspeed at {{ states.sensor.up.state }} {{ states.sensor.up.attributes.unit_of_measurement
-        }}
-    service: notify.ios_corey_glass_iphone
+      message: Transmission upload speed at {{ states.sensor.transmission_up_speed.state
+        }} {{ states.sensor.transmission_up_speed.attributes.unit_of_measurement }}
+      title: Transmission
+    service: notify.pushover
 - id: '1535905939234'
   alias: AccentLightingOff
   trigger:
@@ -108,24 +97,164 @@
     service: light.turn_off
   - data:
       message: LvgRm Accent Lighting Off
-    service: notify.ios_corey_glass_iphone
+    service: notify.ios_CG
 - id: '1535937244536'
   alias: BasementTV-LampsOn
   trigger:
   - entity_id: media_player.basement_sony_tv
-    from: 'off'
     platform: state
     to: 'on'
   condition: []
   action:
   - data:
       brightness_pct: '1'
-      entity_id: group.basement
+      entity_id: light.basement_lamps
       profile: relax
     service: light.turn_on
   - data:
-      brightness_pct: '100'
+      brightness_pct: '40'
       effect: colorloop
       entity_id: light.bloom
       transition: '60'
     service: light.turn_on
+- id: '1536932535231'
+  alias: BedroomAccentLightingOn
+  trigger:
+  - event: sunset
+    offset: '-60'
+    platform: sun
+  condition: []
+  action:
+  - data:
+      brightness_pct: '75'
+      effect: colorloop
+      entity_id: light.master_bedroom_accent
+      transition: '60'
+    service: light.turn_on
+- id: '1537122343631'
+  alias: BedroomAccentLightingNightlight
+  trigger:
+  - at: '22:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      brightness_pct: '1'
+      color_name: white
+      entity_id: light.master_bedroom_accent
+      white_value: '15'
+    service: light.turn_on
+  - data:
+      message: Bedroom Lighting to nightlight
+    service: notify.ios_cg
+- id: '1537122414498'
+  alias: BedroomAccentLightingOff
+  trigger:
+  - event: sunrise
+    offset: '+60'
+    platform: sun
+  condition: []
+  action:
+  - data:
+      entity_id: light.master_bedroom_accent
+    service: light.turn_off
+  - data:
+      message: Bedroom Accent Lighting Off
+    service: notify.ios_cg
+- id: '1539359783415'
+  alias: Roomba Status Check
+  trigger:
+  - entity_id: vacuum.main_floor_roomba
+    platform: state
+  condition: []
+  action:
+  - data:
+      message: ''
+    service: notify.ios_cg
+- alias: Log Level
+  trigger:
+    platform: state
+    entity_id: input_select.log_level
+  action:
+    service: logger.set_level
+    data_template:
+      homeassistant.components: '{{ trigger.to_state.state }}'
+  id: 936741b5a6fc41dd91406eebc56b178a
+- id: '1540401676619'
+  alias: Living Room Lights On Sunset
+  trigger:
+  - event: sunset
+    offset: '-60'
+    platform: sun
+  condition:
+  - condition: state
+    entity_id: group.all_devices
+    state: home
+  - condition: state
+    entity_id: light.living_room_pot_lights
+    state: 'off'
+  - condition: state
+    entity_id: light.living_room_living_room_light
+    state: 'off'
+  action:
+  - data:
+      brightness_pct: '5'
+      entity_id: light.living_room_pot_lights
+    service: light.turn_on
+  - data:
+      brightness_pct: '25'
+      entity_id: light.living_room_living_room_light
+    service: light.turn_on
+  - data:
+      Title: Living Room
+      message: Living Room Lights On (60 mins before sunset)
+    service: notify.ios_cg
+- id: '1540401676497'
+  alias: Living Room Lights Brighter After Sunset
+  trigger:
+  - event: sunset
+    offset: '+60'
+    platform: sun
+  condition:
+  - condition: state
+    entity_id: group.all_devices
+    state: home
+  - condition: state
+    entity_id: light.living_room_pot_lights
+    state: 'on'
+  - condition: state
+    entity_id: light.living_room_living_room_light
+    state: 'on'
+  action:
+  - data:
+      brightness_pct: '50'
+      entity_id: light.living_room_pot_lights
+    service: light.turn_toggle
+  - data:
+      brightness_pct: '50'
+      entity_id: light.living_room_living_room_light
+    service: light.turn_toggle
+  - data:
+      Title: Living Room
+      message: Living Room Lights Brightness Up (60 mins after sunset)
+    service: notify.ios_cg
+- id: '1540403176234'
+  alias: Nest Eco Mode Cancel When Home
+  trigger:
+  - entity_id: binary_sensor.51_nelson_away
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: group.all_devices
+    state: home
+  action:
+  - data:
+      away_mode: 'false'
+      entity_id: climate.main_floor
+    service: climate.set_away_mode
+  - data:
+      message: Nest Eco Mode cancelled because we are home!
+      title: Nest
+    service: notify.ios_cg

@@ -1,18 +1,24 @@
 ### SENSORS ###
-  - platform: yr
-    name: Weather
+
+## Yahoo Weather
+  - platform: yweather
     monitored_conditions:
-      - temperature
-      - symbol
-      - precipitation
-      - windSpeed
-      - windDirection
+      - weather
+      - weather_current
+      - temp_min
+      - temp_max
+      - wind_speed
+#      - pressure
+#      - visibility
       - humidity
-      - cloudiness
+      - temperature
 
   - platform: plex
     host: !secret plex_host
     token: !secret plex_token
+    remove_unavailable_clients: true   # default true
+    client_remove_interval: 600        # default 600sec
+    entity_namespace: 'plex'
 
   - platform: radarr
     host: !secret radarr_host
@@ -22,10 +28,10 @@
     monitored_conditions:
 #      - movies
       - upcoming
-      - diskspace
+#      - diskspace
     unit: TB
-    include_paths:
-      - /media_1/MOVIES
+#    include_paths:
+#      - /media_1/MOVIES
 
   - platform: sonarr
     host: !secret sonarr_host
@@ -34,10 +40,10 @@
     days: 1 
     monitored_conditions:
       - upcoming
-      - diskspace
+ #     - diskspace
     unit: TB
-    include_paths:
-      - /tv
+ #   include_paths:
+ #     - /tv
 
   - platform: transmission
     host: !secret dockerserver
@@ -52,7 +58,7 @@
     monitored_conditions:
       - ads_blocked_today
       - ads_percentage_today
-      - domains_being_blocked
+#      - domains_being_blocked
       - dns_queries_today
 
   - platform: cert_expiry

@@ -4,7 +4,7 @@ homeassistant:
   longitude: !secret hass_long
   elevation: !secret hass_elevation
   unit_system: metric
-  time_zone: EST
+  time_zone: !secret timezone
   customize: !include customize.yaml
   customize_glob: !include customize_glob.yaml
 
@@ -21,12 +21,24 @@ config:
 http:
   api_password: !secret http_password
   base_url: !secret http_url
+#  trusted_proxies:
+#    - 127.0.0.1
+#    - 10.0.0.8
+#    - ::1
+#  trusted_networks:
+#    - 127.0.0.1
+#    - ::1
+#    - 10.0.0.0/24
+#    - fd00::/8
+#  ip_ban_enabled: true
+#  login_attempts_threshold: 5
 
 # show map
 map:
 
 # Checks for available updates
 updater:
+#  include_used_components: true
 
 # HomeKit integration - push HA devices to HomeKit
 homekit: !include homekit.yaml
@@ -35,14 +47,14 @@ homekit: !include homekit.yaml
 cloud:
 
 # Enable iOS integration:
-ios: !include ios.yaml
+#ios: !include ios.yaml
 
-# Discover some devices automatically
+# Discover some hubs or devices automatically
 discovery:
   ignore:
     - songpal
     - deconz
-    - philips_hue
+    - igd
 # Enable capturing HomeKit accessories/devices into HA directly, effectively bypassing HomeKit
 # Must not be adding to Apple Home already or they will not add to HA
 #  enable:
@@ -64,6 +76,33 @@ sun:
 tts:
   platform: google
 
+##### ---------- my devices --------------######
+lutron_caseta:
+  host: !secret caseta_host
+  keyfile: caseta.key
+  certfile: caseta.crt
+  ca_certs: caseta-bridge.crt
+
+hue:
+  bridges:
+    - host: !secret hue_host
+      allow_unreachable: true
+      allow_hue_groups: false
+
+nest:
+  client_id: !secret nest_id
+  client_secret: !secret nest_secret
+#  structure: 
+#    - !secret nest_structure
+
+cast:
+  media_player:
+  - host: !secret mibox1_host
+  - host: !secret mibox2_host
+  - host: !secret mibox3_host
+  - host: !secret mibox4_host
+
+### EXTERNAL CONFIG FILES
 group: !include groups.yaml
 light: !include lights.yaml
 automation: !include automations.yaml
@@ -76,23 +115,8 @@ binary_sensor: !include binary_sensors.yaml
 switch: !include switches.yaml
 vacuum: !include vacuums.yaml
 zone: !include zones.yaml
-
-# ---------- my devices --------------#
-lutron_caseta:
-  host: !secret caseta_host
-  keyfile: caseta.key
-  certfile: caseta.crt
-  ca_certs: caseta-bridge.crt
-
-hue:
-  bridges:
-    - host: !secret hue_host
-      allow_hue_groups: false
-
-nest:
-  client_id: !secret nest_id
-  client_secret: !secret nest_secret
-
-shell_command:
-  restart_homebridge: 'curl http://10.0.0.8:8126/container/homebridge/restart'
-  restart_web: 'curl http://10.0.0.8:8126/container/le/restart && curl http://10.0.0.8:8126/container/organizr/restart'
+logger: !include logger.yaml
+input_select: !include input_select.yaml
+fan: !include fans.yaml
+notify: !include notify.yaml
+shell_command: !include shell_commands.yaml

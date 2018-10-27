@@ -1,0 +1,25 @@
+  - name: Pushover
+    platform: pushover
+    api_key: !secret pushover_api
+    user_key: !secret pushover_user
+
+  - name: slack
+    platform: slack
+    api_key: !secret slack_api
+    default_channel: '#home-assistant'
+
+  - platform: nfandroidtv
+    name: Bedroom
+    host: !secret mibox1_host
+
+  - platform: nfandroidtv
+    name: Tomas
+    host: !secret mibox2_host
+
+  - platform: nfandroidtv
+    name: Sofia
+    host: !secret mibox3_host
+
+  - platform: nfandroidtv
+    name: Basement
+    host: !secret mibox4_host

@@ -48,19 +48,26 @@ main_floor:
     - remote.appletvlivingroom
     - light.living_room_living_room_light
     - light.living_room_pot_lights
+    - vacuum.main_floor_roomba
 
 docker_containers:
   name: Dockers
   control: hidden
   entities:
+    - switch.docker_cloudflare1
+    - switch.docker_cloudflare2
+    - switch.docker_cloudflare3
+    - switch.docker_cloudflare4
     - switch.docker_crashplan
     - switch.docker_homeassistant
     - switch.docker_homebridge
     - switch.docker_jackett
     - switch.docker_le
+    - switch.docker_mariadb
     - switch.docker_monitorr
-    - switch.docker_mysql
     - switch.docker_mysql_backup
+    - switch.docker_netdata
+    - switch.docker_netdata_macmini
     - switch.docker_ninja
     - switch.docker_ninja_cron
     - switch.docker_ninja_web
@@ -71,15 +78,13 @@ docker_containers:
     - switch.docker_radarr_4k
     - switch.docker_sonarr
     - switch.docker_sonarr_4k
+    - switch.docker_suitecrm
     - switch.docker_tautulli
     - switch.docker_transmission
     - switch.docker_unifi
     - switch.docker_vpn
     - switch.docker_watchtower
     - switch.docker_watchtower_macmini
-    - switch.docker_cloudflare1
-    - switch.docker_cloudflare2
-    - switch.docker_cloudflare3
 
 computer_systems:
   name: Computer Systems
@@ -100,9 +105,11 @@ computer_systems:
     - sensor.ssl_certificate_expiry
     - group.docker_containers
     - sensor.cgca_ssl_expiry
+    - group.usg_stats
 
 transmission:
   name: Transmission
+  control: hidden
   entities:
     - sensor.transmission_status
     - sensor.transmission_active_torrents
@@ -112,17 +119,24 @@ transmission:
 
 mediaserver:
   name: Media Server
+  control: hidden
   entities:
-    - sensor.plex
+    - sensor.plex_plex
     - sensor.radarr_movies
     - sensor.radarr_upcoming
     - sensor.radarr_disk_space
     - sensor.sonarr_upcoming
     - sensor.sonarr_disk_space
+    - sensor.cgca_ssl_expiry
+    - script.restart_web
+    - script.restart_radarr
+    - script.restart_sonarr
 
 internet:
   name: Internet
+  control: hidden
   entities:
+    - switch.pihole_switch
     - sensor.download_iperfhenet
     - sensor.upload_iperfhenet
     - sensor.fastcom_download
@@ -134,18 +148,33 @@ internet:
     - sensor.pihole_dns_queries_today
     - sensor.pihole_domains_blocked
 
+usg_stats:
+  name: USG Stats
+  entities:
+    - sensor.unifigateway3_bytes_received
+    - sensor.unifigateway3_bytes_sent
+    - sensor.unifigateway3_kbytesec_received
+    - sensor.unifigateway3_kbytesec_sent
+    - sensor.unifigateway3_packets_received
+    - sensor.unifigateway3_packets_sent
+    - sensor.unifigateway3_packetssec_received
+    - sensor.unifigateway3_packetssec_sent
+
 indoorclimate:
   name: Indoor Climate
   control: hidden
   entities:
     - climate.main_floor
+    - fan.nest_thermostat
     - sensor.main_floor_thermostat_target
     - sensor.main_floor_thermostat_humidity
     - sensor.main_floor_thermostat_target
     - sensor.main_floor_thermostat_temperature
     - sensor.main_floor_thermostat_operation_mode
-    - sensor.main_floor_thermostat_fan
     - sensor.main_floor_thermostat_hvac_state
+    - binary_sensor.main_floor_thermostat_fan
+    - sensor.51_nelson_eta
+    - binary_sensor.51_nelson_away
 
 outdoorclimate:
   name: Outdoor Climate

@@ -1,1 +1,5 @@
-#
+  - name: Home
+    latitude: !secret hass_lat
+    longitude: !secret hass_long
+    elevation: !secret hass_elevation
+    radius: 50
